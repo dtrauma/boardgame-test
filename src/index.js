@@ -1,12 +1,32 @@
+/*
+ * Copyright 2017 The boardgame.io Authors.
+ *
+ * Use of this source code is governed by a MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ */
+
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { render } from 'react-dom';
+import { Client } from 'boardgame.io/react';
+import { AI } from 'boardgame.io/ai';
+import SimpleMinion from './game';
+import Board from './board';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const App = Client({
+  game: SimpleMinion,
+  board: Board,
+  ai: AI({
+    enumerate: G => {
+      let moves = [];
+      for (let i = 0; i < 9; i++) {
+        if (G.cells[i] === null) {
+          moves.push({ move: 'clickCell', args: [i] });
+        }
+      }
+      return moves;
+    }
+  })
+});
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+render(<App/>, document.getElementById('root'));
