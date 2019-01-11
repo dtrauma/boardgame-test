@@ -22,6 +22,10 @@ class Board extends React.Component {
 		isMultiplayer: PropTypes.bool,
 	};
 
+	onReroll = () => {
+		this.props.moves.reroll();
+	}
+
 	render() {
 		return (
 			<div>
@@ -29,6 +33,7 @@ class Board extends React.Component {
 				<div class="dice">{this.props.G.dice.map((val, i) => (
 					<Die key={i} value={val} />))}
 				</div>
+				<button onClick={this.onReroll}>Reroll</button>
 			</div>
 		);
 	}

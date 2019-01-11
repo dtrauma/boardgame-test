@@ -21,8 +21,10 @@ const TestClient = Client({
 });
 
 const App = () => (
-  <div style={{display: "flex"}}>
-    {[0, 1, 2].map(id => <TestClient playerID={id.toString()} key={id} />)}
+  <div>Initial state different, synced on move.
+    <div style={{display: "flex"}}>
+      {[0, 1, 2].map(id => <TestClient playerID={id.toString()} key={id} />)}
+    </div>
   </div>
 );
 render(<App/>, document.getElementById('root'));
