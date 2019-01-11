@@ -1,0 +1,44 @@
+.die {
+	width: 80px;
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+	border: 2px solid black;
+	font-size: 50px;
+	color: black;
+	font-family: Impact, Arial Black, Courier, sans-serif;
+}
+
+.die .die6 {
+	display: flex;
+	flex-wrap: wrap;
+	width: 60px;
+	height: 60px;
+	margin: 10px 13px;
+	align-items: center;
+}
+
+.die.active {
+	text-shadow: 0 0 10px white, 0 0 3px white;
+}
+
+.die.inactive {
+	/*opacity: 66%;*/
+	border-color: grey;
+	border-style: dotted;
+	filter: brightness(40%) grayscale(50%);
+}
+
+.die.selected {
+	border-color: red;
+	box-shadow: 0 0 3px red;
+	filter: brightness(120%);
+}
+
+.die6-inner {
+	width: 18px;
+	height: 20px;
+	font-size: 25px;
+	line-height: 20px;
+	/*background-color: white;*/
+}

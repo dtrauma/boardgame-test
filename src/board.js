@@ -10,6 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './board.css';
 
+import Die from './die';
+
 class Board extends React.Component {
 	static propTypes = {
 		G: PropTypes.any.isRequired,
@@ -20,40 +22,13 @@ class Board extends React.Component {
 		isMultiplayer: PropTypes.bool,
 	};
 
-	onClick = id => {
-		if (this.isActive(id)) {
-			this.props.moves.playCard(id);
-		}
-	};
-
-	isActive(id) {
-		return true;
-	}
-
 	render() {
-		const stacks = [];
-		for (let [name, st] of Object.entries(this.props.G.player.stacks)) {
-			stacks.push(<h2>{name}</h2>)
-			stacks.push(<div>{st}</div>);
-		}
-
-
-		let winner = null;
-		if (this.props.ctx.gameover) {
-			winner =
-				this.props.ctx.gameover.winner !== undefined ? ( <
-					div id = "winner" > Winner: {
-						this.props.ctx.gameover.winner
-					} < /div>
-				) : ( <
-					div id = "winner" > Draw! < /div>
-				);
-		}
-
 		return (
 			<div>
-				<div class="stacks">{stacks}</div>
-				<div>{winner}</div>
+				<h1>Player {this.props.playerID}</h1>
+				<div class="dice">{this.props.G.dice.map((val, i) => (
+					<Die key={i} value={val} />))}
+				</div>
 			</div>
 		);
 	}

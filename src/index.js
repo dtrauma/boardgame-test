@@ -10,23 +10,19 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Client } from 'boardgame.io/react';
 import { AI } from 'boardgame.io/ai';
-import SimpleMinion from './game';
+import TestGame from './game';
 import Board from './board';
 
-const App = Client({
-  game: SimpleMinion,
+const TestClient = Client({
+  game: TestGame,
   board: Board,
-  ai: AI({
-    enumerate: G => {
-      let moves = [];
-      for (let i = 0; i < 9; i++) {
-        if (G.cells[i] === null) {
-          moves.push({ move: 'clickCell', args: [i] });
-        }
-      }
-      return moves;
-    }
-  })
+  numPlayers: 3,
+  multiplayer: { local: true }
 });
 
+const App = () => (
+  <div style={{display: "flex"}}>
+    {[0, 1, 2].map(id => <TestClient playerID={id.toString()} key={id} />)}
+  </div>
+);
 render(<App/>, document.getElementById('root'));
